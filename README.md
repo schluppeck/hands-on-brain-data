@@ -12,4 +12,13 @@ You could also used this as a starting point for learning a bit of scripting / p
 
 - install `julia` and `pluto.jl` as per excellent instructions [in this youtube clip](https://www.youtube.com/watch?v=OOjKEgbt8AI&list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ&index=21&t=204s)
 
-- clone this repository 
+- clone this repository
+
+- make sure you have the dependencies (packages installed). In the `julia` interpreter run:
+
+```julia
+p = ["DelimitedFiles","NIfTI","Images","ImageView","Plots","PlutoUI"]
+import Pkg
+Pkg.add(p)
+```
+

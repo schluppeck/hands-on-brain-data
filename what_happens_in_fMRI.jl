@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.3
+# v0.12.4
 
 using Markdown
 using InteractiveUtils
@@ -29,11 +29,13 @@ begin
 	md"""[some setup / package includes...] """
 end
 
-# ╔═╡ 8029070e-efb0-11ea-1d0a-7f402f2e9989
-md"""# What happens in an fMRI experiment"""
-
 # ╔═╡ 4df55a88-f98a-11ea-1c9f-cd52a4b5062f
-md"""## General idea
+
+md"""
+
+# What happens in an fMRI experiment
+
+## General idea
 
 - some images are being displayed to a participant
 - the visual part of their brain works harder (trying to process information)
@@ -56,6 +58,9 @@ object_dir = "./stims/objects/";
 # ╔═╡ 940859e4-0191-11eb-0a64-bfc069e803d8
 objectImages = readdir(object_dir);
 
+# ╔═╡ 9af0d01c-1488-11eb-159d-c72e4cffaa22
+md"""Some parameters that define the timing of the block design experiment"""
+
 # ╔═╡ af8bd0d4-0190-11eb-1f8f-7368cd387053
 nA = 8
 
@@ -71,18 +76,30 @@ nDynamics = 2*(nA+nGray)*nRepeats
 # ╔═╡ 3488c298-0190-11eb-03ef-cf178151e777
 begin
 	timing = repeat([[repeat(["gray"], nGray, 1); repeat(["face"], nA, 1)];
-		repeat(["gray"], nGray, 1); repeat(["object"], nA, 1)], nRepeats, 1);
-	md"""Define a timing vector with $( nDynamics ) dynamics."""
+					  repeat(["gray"], nGray, 1); repeat(["object"], nA, 1)], 							nRepeats, 1);
+	md"""
+	Define a timing vector with $( nDynamics ) dynamics.
+	
+	This is done by repeating `["gray"]` $nGray times, then `["face"]` $nA times, the same for `["object"]` and repeating those $nRepeats times.
+	
+	"""
 end
 
 # ╔═╡ ae0fe97e-0194-11eb-2c80-41c90b26ee5c
-md"""## Run a sped-up version of the experiment"""
+md"""
+## Run a sped-up version of the experiment
+
+We can bind a value that changes every "tick" using a `Clock` function... to make sure we don't keep going beyond the length of the dataset ($nDynamics), we wrap around using the `mod`ulo.
+
+"""
 
 # ╔═╡ 19252aa4-0105-11eb-0b5c-5f3769240354
 md"""Step through time: each **tick** is a **volume** in the fMRI experiment"""
 
 # ╔═╡ e4c0f9f6-01cb-11eb-111f-b774df6174bb
-md"""Show stimulus timing w/ data? $(@bind showStimTiming CheckBox())"""
+md"""Show stimulus timing w/ data? $(@bind showStimTiming CheckBox())
+
+If this checkbox is ticked, then display an image from the corresponding block"""
 
 # ╔═╡ a54017da-0194-11eb-309c-415dd99b4db1
 @bind t Clock(0.5)
@@ -124,7 +141,7 @@ oStim = timing .== "object" ;
 md"""## Load in that CSV file """
 
 # ╔═╡ 368e2640-f8e0-11ea-1ddf-b37069ba7588
-d, h= readdlm("stimulus_timing.csv", ',', Float64, header = true )
+d, h= readdlm("data/stimulus_timing.csv", ',', Float64, header = true )
 
 # ╔═╡ 5bb7ed88-0106-11eb-2181-d123e1a1cc31
 begin
@@ -186,27 +203,27 @@ nPoints = 20; # number of points in plot above (not used)
 addNoise = 0.5 .* randn(nPoints);
 
 # ╔═╡ Cell order:
-# ╟─8029070e-efb0-11ea-1d0a-7f402f2e9989
-# ╟─9bc349e8-efb0-11ea-1392-cd735828af33
+# ╠═9bc349e8-efb0-11ea-1392-cd735828af33
 # ╟─4df55a88-f98a-11ea-1c9f-cd52a4b5062f
 # ╟─f151a60e-016f-11eb-3ab4-bd2c5adbd801
 # ╠═a1a5f0ee-016f-11eb-22bc-d965805be7f0
 # ╠═b36f1e5c-016f-11eb-3f9e-f39becc598c6
 # ╠═80dc039a-0191-11eb-1792-352eabf32591
 # ╠═940859e4-0191-11eb-0a64-bfc069e803d8
+# ╟─9af0d01c-1488-11eb-159d-c72e4cffaa22
 # ╟─af8bd0d4-0190-11eb-1f8f-7368cd387053
 # ╟─b6cc5c4c-0190-11eb-00fc-1ddd56445030
 # ╟─b951cf10-0190-11eb-31fe-0beb75cc6f3e
 # ╟─bddcdeac-0191-11eb-061e-b75875bc5b7a
 # ╟─3488c298-0190-11eb-03ef-cf178151e777
 # ╟─ae0fe97e-0194-11eb-2c80-41c90b26ee5c
-# ╟─28ec2008-0193-11eb-1ca6-afde7ea782a1
+# ╠═28ec2008-0193-11eb-1ca6-afde7ea782a1
 # ╟─19252aa4-0105-11eb-0b5c-5f3769240354
 # ╟─e4c0f9f6-01cb-11eb-111f-b774df6174bb
 # ╟─778800f8-f98a-11ea-1b87-1108f500ad5f
-# ╟─a54017da-0194-11eb-309c-415dd99b4db1
+# ╠═a54017da-0194-11eb-309c-415dd99b4db1
 # ╟─c4c00586-01ce-11eb-0625-17b9ab6bfa8f
-# ╟─5bb7ed88-0106-11eb-2181-d123e1a1cc31
+# ╠═5bb7ed88-0106-11eb-2181-d123e1a1cc31
 # ╟─cefe27e4-03e0-11eb-0478-674a7e1ae6e9
 # ╟─d27ceec0-01ca-11eb-3152-7d7603d6546a
 # ╠═b2df1378-01cb-11eb-01fd-4d9da6872e9b
