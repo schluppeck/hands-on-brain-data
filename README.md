@@ -22,3 +22,9 @@ import Pkg
 Pkg.add(p)
 ```
 
+Then run the Pluto notebook you want to explore. The first time you run it, you will have to be a bit patient, as some additional packages may need to be installed...)
+
+```julia
+using Pluto
+Pluto.run(notebook="what_are_images.jl")
+```

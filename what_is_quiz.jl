@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.3
+# v0.12.7
 
 using Markdown
 using InteractiveUtils
@@ -25,6 +25,7 @@ begin
 	using PlutoUI
 	using Printf
 	using LinearAlgebra
+	using CSV
 end
 
 # ╔═╡ df5232e0-04e2-11eb-0c26-f19b9d9c7b14
@@ -47,13 +48,13 @@ Set of N different plots with voxel timecourses that look
 md"""## Load in data """
 
 # ╔═╡ 368e2640-f8e0-11ea-1ddf-b37069ba7588
-d, h= readdlm("stimulus_timing.csv", ',', Float64, header = true )
+d, h= readdlm("data/stimulus_timing.csv", ',', Float64, header = true )
 
 # ╔═╡ 51594b8e-0741-11eb-0c03-338b971e945f
 df = DataFrame(d,[h...]) # read as dataframe
 
 # ╔═╡ bf362532-0741-11eb-137e-67c2924f4f92
-fmri_data = niread("filtered_func_data.nii");
+fmri_data = niread("data/filtered_func_data.nii");
 
 
 # ╔═╡ db903b82-0741-11eb-2df7-0dcebbb93c01
@@ -65,24 +66,6 @@ fmri_data.header
 
 # ╔═╡ cac0339a-f8e4-11ea-0876-f91dc7db1454
 md"""## Have a quick look through data"""
-
-# ╔═╡ 1058934e-f8e1-11ea-1896-35d75c4b6a8e
-begin
-md"""
-*Make a slider that controls which column to plot*
-	
-**column:** $(@bind whichCol Slider(2:size(d,2), default=2, show_value=true))
-"""
-end
-
-# ╔═╡ c6cab78c-f836-11ea-2b5b-23f0006f8e93
-begin
-	plot(d[:,1], d[:,whichCol], xlabel="Time (volumes)",
-		ylabel="fMRI response", label="$(h[whichCol])", xlims=(0,160), ylims=(-5,5))
-end
-
-# ╔═╡ da4ac85c-f8e4-11ea-192e-03d5b6862d5a
-md"""## Scaling = multiplying"""
 
 # ╔═╡ 39d465a6-f8e2-11ea-2d71-75cbe586428c
 function plotAtCoords(theData, theX, theY, theZ)
@@ -121,6 +104,9 @@ function plotWithStimuli(fmri_data, xs, ys, zs)
 end
 
 
+# ╔═╡ fe67814c-2299-11eb-2080-79f06d510355
+# save(filename, illustration)
+
 # ╔═╡ 1c3b6c56-f8e2-11ea-3969-f59871025c5e
 begin
 	sz = convert.(Int64,size(fmri_data).//2)
@@ -136,40 +122,37 @@ How can we *scale* the idealised prediction to fit the data better?
 	"""
 end
 
-# ╔═╡ 45e986f0-074c-11eb-0d49-dbce692ade1a
-begin
-	heatmap(view(fmri_data, :, :, zs, 1), 
-		aspect_ratio=1,
-		c=:greys, colorbar=:none)
-	xaxis!(showaxis=:no)
-	plot!([xs], [ys], m=:square,
-		msw=4, msc=:red, ms=4, c=:red)
-end
-
 # ╔═╡ 665f1302-07b8-11eb-0848-8fb424cae65c
 p = plotAtCoords(fmri_data, xs, ys, zs)
 
 # ╔═╡ 2522ee1a-07ca-11eb-1d15-5f6b9e8f3aa6
-plotWithStimuli(fmri_data, xs, ys, zs)
+illustration = plotWithStimuli(fmri_data, xs, ys, zs)
 
 # ╔═╡ bae1b4e6-07ae-11eb-1fb9-c56c0cf7298a
 md""" 
 $(@bind fileroot TextField(;default="testfile"))
 
 $(@bind test Button("clicked"))
+
+save PDF files to disk: $(@bind allowSaving CheckBox() )
+
+
 """
 
 # ╔═╡ e8716624-07b8-11eb-0219-81e10bd83100
-filename = @sprintf("%s%+02d%+02d%+02d.svg", fileroot, xs, ys, zs)
+filename = @sprintf("%s%+02d%+02d%+02d.pdf", fileroot, xs, ys, zs)
 
 # ╔═╡ 5176ef4e-07ba-11eb-09e7-9b6894fcc592
 begin
+	test
 	allFilenames = [];
 	for (xx,yy,zz) in [(18,14,4), (17,13,4), (19,9,4), (22,23,2), (20,21,2), (40,17,2), (36,1,5),(46,11,1),(19,11,2)] 
 		sfilename = @sprintf("%s%+02d%+02d%+02d.pdf", fileroot, xx+1, yy+1, zz+1)
 		#q = plotAtCoords(fmri_data, xx+1, yy+1, zz+1)
 		q = plotWithStimuli(fmri_data, xx+1, yy+1, zz+1)
-		save(sfilename, q)
+		if allowSaving
+			save(sfilename, q)
+		end
 		append!(allFilenames, [sfilename])
 	end
 	with_terminal(print, allFilenames)
@@ -183,11 +166,98 @@ begin
 	md""" because `test` hooked up to `Button` this is reactive, **$(filename)**"""
 end
 
-# ╔═╡ 417c2dba-07b1-11eb-18cc-61d23caecbc6
-rand(1:9999, 1,1)
+# ╔═╡ 7c2633f6-2297-11eb-16f1-7b4f1b1a283c
+# 4 each for now F, O, Both / NB coords here in FSL 0-indexed form!, filenames will be 1-indexd!
+begin
+quizVoxels = [
+	(17,13,4), 
+	(18,14,5), 
+	(18,8,4), 
+	(18,14,4),
+	
+	(40,20,3),
+	(40,19,2),
+	(22,23,2),
+	(40,17,1),
+	
+	(36,10,1),
+	(37,9,1),
+	(37,9,2),
+	(25,7,2)];
 
-# ╔═╡ 7e11e66e-07b3-11eb-1186-fba413764c97
-with_terminal(dump, [1,2,[3,4]])
+	quizVoxels3 = quizVoxels[[12,1,6]]
+end
+
+
+
+# ╔═╡ 6a1c2364-2297-11eb-36b5-7f100ff97687
+# for the 2020/21 lab report:
+begin
+	allFilenamesAssess = [];
+	for (xx,yy,zz) in quizVoxels 
+		sfilename = @sprintf("%s%+02d%+02d%+02d.pdf", fileroot, xx+1, yy+1, zz+1)
+		#q = plotAtCoords(fmri_data, xx+1, yy+1, zz+1)
+		q = plotWithStimuli(fmri_data, xx+1, yy+1, zz+1)
+		if allowSaving
+			save(sfilename, q)
+		end
+		append!(allFilenamesAssess, [sfilename])
+	end
+	with_terminal(print, allFilenamesAssess)
+	
+end
+
+
+# ╔═╡ e977cf5e-2342-11eb-2f7b-e1804c00fdd1
+md"""save CSV files to disk: $(@bind allowSavingCSV CheckBox() )"""
+
+# ╔═╡ 946112fc-229b-11eb-3027-bd10d12cb59b
+normalizeTimecourse = function(tc)
+	tc = 100.0 .* (tc./mean(tc) .- 1)
+end
+
+
+# ╔═╡ 32372d56-22c7-11eb-0923-4db4ed166e26
+@bind quizPlot Slider(1:12, show_value=true)
+
+# ╔═╡ 47b7c70c-229b-11eb-303a-41674232ea90
+begin
+	tm = normalizeTimecourse(fmri_data[1 .+ quizVoxels[quizPlot]...,:])
+	plot(tm, label="quiz: $quizPlot, $(1 .+ quizVoxels[quizPlot])")
+end
+
+# ╔═╡ da7f81ca-229a-11eb-138f-43dd54c21ad5
+writeVoxelDataToFile = function(fmri_data, xx, yy, zz, sfilename)
+
+	t = [collect(0.0:159.0).*1., normalizeTimecourse( fmri_data[xx+1, yy+1, zz+1,:] ) ]
+	df = DataFrame(t, [:Time_seconds, :fMRI_response])
+	CSV.write(sfilename, df)
+end
+	
+
+# ╔═╡ 7d28a38a-229a-11eb-2cec-2153fbbe4e63
+# for the 2020/21 lab report:
+begin
+	if true
+	allFilenamesCSV = [];
+	for (xx,yy,zz) in quizVoxels3 show
+		with_terminal(print, (xx,yy,zz))
+		sfilename = @sprintf("%s%+02d%+02d%+02d.csv", "lab-report" , xx+1, yy+1, zz+1)
+		if allowSavingCSV
+			writeVoxelDataToFile(fmri_data, xx+1, yy+1, zz+1, sfilename)
+		else		
+			println("would be saving: ", sfilename)
+		end
+		append!(allFilenamesCSV, [sfilename])
+	end
+	with_terminal(print, allFilenamesCSV)
+	end
+	
+end
+
+
+# ╔═╡ fc1de00a-229b-11eb-22f3-13b7f379ed7d
+writeVoxelDataToFile(fmri_data, quizVoxels[1]..., "bla")
 
 # ╔═╡ 2315ce8c-fb57-11ea-31a4-eb68d1d096d3
 md""" ### Determining what fits best
@@ -400,29 +470,33 @@ addNoise = 0.5 .* randn(nPoints);
 # ╔═╡ Cell order:
 # ╠═8029070e-efb0-11ea-1d0a-7f402f2e9989
 # ╠═9bc349e8-efb0-11ea-1392-cd735828af33
-# ╠═4df55a88-f98a-11ea-1c9f-cd52a4b5062f
-# ╠═2b2f6be4-f07f-11ea-1459-775749ca949f
+# ╟─4df55a88-f98a-11ea-1c9f-cd52a4b5062f
+# ╟─2b2f6be4-f07f-11ea-1459-775749ca949f
 # ╠═368e2640-f8e0-11ea-1ddf-b37069ba7588
 # ╠═51594b8e-0741-11eb-0c03-338b971e945f
 # ╠═bf362532-0741-11eb-137e-67c2924f4f92
 # ╠═db903b82-0741-11eb-2df7-0dcebbb93c01
 # ╠═19bc9784-0742-11eb-18a4-edca29549ab4
 # ╟─cac0339a-f8e4-11ea-0876-f91dc7db1454
-# ╟─1058934e-f8e1-11ea-1896-35d75c4b6a8e
-# ╟─c6cab78c-f836-11ea-2b5b-23f0006f8e93
-# ╟─da4ac85c-f8e4-11ea-192e-03d5b6862d5a
-# ╟─45e986f0-074c-11eb-0d49-dbce692ade1a
-# ╠═665f1302-07b8-11eb-0848-8fb424cae65c
-# ╠═a233a2e4-07c7-11eb-07d1-5561b4cc64b2
-# ╠═39d465a6-f8e2-11ea-2d71-75cbe586428c
+# ╟─665f1302-07b8-11eb-0848-8fb424cae65c
+# ╟─39d465a6-f8e2-11ea-2d71-75cbe586428c
+# ╟─a233a2e4-07c7-11eb-07d1-5561b4cc64b2
 # ╠═2522ee1a-07ca-11eb-1d15-5f6b9e8f3aa6
+# ╠═fe67814c-2299-11eb-2080-79f06d510355
 # ╟─1c3b6c56-f8e2-11ea-3969-f59871025c5e
-# ╟─bae1b4e6-07ae-11eb-1fb9-c56c0cf7298a
+# ╠═bae1b4e6-07ae-11eb-1fb9-c56c0cf7298a
 # ╠═e8716624-07b8-11eb-0219-81e10bd83100
-# ╠═5176ef4e-07ba-11eb-09e7-9b6894fcc592
+# ╟─5176ef4e-07ba-11eb-09e7-9b6894fcc592
 # ╟─63820b34-07af-11eb-21c3-75356e38ec43
-# ╠═417c2dba-07b1-11eb-18cc-61d23caecbc6
-# ╠═7e11e66e-07b3-11eb-1186-fba413764c97
+# ╠═7c2633f6-2297-11eb-16f1-7b4f1b1a283c
+# ╠═6a1c2364-2297-11eb-36b5-7f100ff97687
+# ╟─e977cf5e-2342-11eb-2f7b-e1804c00fdd1
+# ╠═7d28a38a-229a-11eb-2cec-2153fbbe4e63
+# ╠═946112fc-229b-11eb-3027-bd10d12cb59b
+# ╠═47b7c70c-229b-11eb-303a-41674232ea90
+# ╠═32372d56-22c7-11eb-0923-4db4ed166e26
+# ╠═da7f81ca-229a-11eb-138f-43dd54c21ad5
+# ╠═fc1de00a-229b-11eb-22f3-13b7f379ed7d
 # ╟─2315ce8c-fb57-11ea-31a4-eb68d1d096d3
 # ╟─d9f6c1e8-fa89-11ea-05b3-07daaa06326f
 # ╟─a1b031a4-fc08-11ea-2314-13e2e79c2ca3

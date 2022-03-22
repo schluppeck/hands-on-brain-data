@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.4
+# v0.12.6
 
 using Markdown
 using InteractiveUtils
@@ -26,7 +26,11 @@ begin
 	using PlutoUI
 	using Printf
 	using LinearAlgebra
-	md"""[some setup / package includes...] """
+	md"""
+	[some setup / package includes...] 
+	
+	the first time you run this notebook, it can take a while to start up.
+	"""
 end
 
 # ╔═╡ 4df55a88-f98a-11ea-1c9f-cd52a4b5062f
@@ -128,9 +132,6 @@ md"""Show face response w/ data? $(@bind showResponseTimingF CheckBox())
 Show object response w/ data? $(@bind showResponseTimingO CheckBox())
 """
 
-# ╔═╡ cefe27e4-03e0-11eb-0478-674a7e1ae6e9
-#md"""logical indeces of "face" and "object" events"""
-
 # ╔═╡ d27ceec0-01ca-11eb-3152-7d7603d6546a
 fStim = timing .== "face" ;
 
@@ -190,20 +191,15 @@ md"""
 
 # ╔═╡ bfdd7d56-f98a-11ea-3064-a9033ba994a5
 # choose which plotting backend to use.
+
 # plotly() is dynamic / webbased
 # gr() make nice static plots
 
 #plotly()
 gr()
 
-# ╔═╡ eda9e2dc-f98b-11ea-3eca-539ac938107c
-nPoints = 20; # number of points in plot above (not used)
-
-# ╔═╡ f6e4754c-f98b-11ea-2a42-034d82f52ca1
-addNoise = 0.5 .* randn(nPoints);
-
 # ╔═╡ Cell order:
-# ╠═9bc349e8-efb0-11ea-1392-cd735828af33
+# ╟─9bc349e8-efb0-11ea-1392-cd735828af33
 # ╟─4df55a88-f98a-11ea-1c9f-cd52a4b5062f
 # ╟─f151a60e-016f-11eb-3ab4-bd2c5adbd801
 # ╠═a1a5f0ee-016f-11eb-22bc-d965805be7f0
@@ -221,15 +217,12 @@ addNoise = 0.5 .* randn(nPoints);
 # ╟─19252aa4-0105-11eb-0b5c-5f3769240354
 # ╟─e4c0f9f6-01cb-11eb-111f-b774df6174bb
 # ╟─778800f8-f98a-11ea-1b87-1108f500ad5f
-# ╠═a54017da-0194-11eb-309c-415dd99b4db1
+# ╟─a54017da-0194-11eb-309c-415dd99b4db1
 # ╟─c4c00586-01ce-11eb-0625-17b9ab6bfa8f
 # ╠═5bb7ed88-0106-11eb-2181-d123e1a1cc31
-# ╟─cefe27e4-03e0-11eb-0478-674a7e1ae6e9
-# ╟─d27ceec0-01ca-11eb-3152-7d7603d6546a
+# ╠═d27ceec0-01ca-11eb-3152-7d7603d6546a
 # ╠═b2df1378-01cb-11eb-01fd-4d9da6872e9b
 # ╟─2b2f6be4-f07f-11ea-1459-775749ca949f
 # ╠═368e2640-f8e0-11ea-1ddf-b37069ba7588
 # ╟─d5c0b236-f98b-11ea-0444-6fe340642707
-# ╠═bfdd7d56-f98a-11ea-3064-a9033ba994a5
-# ╠═eda9e2dc-f98b-11ea-3eca-539ac938107c
-# ╟─f6e4754c-f98b-11ea-2a42-034d82f52ca1
+# ╟─bfdd7d56-f98a-11ea-3064-a9033ba994a5
