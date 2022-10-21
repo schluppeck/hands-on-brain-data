@@ -51,11 +51,5 @@ Pluto.run()
 
 <img src="./pluto-notebook.png" width="50%"/>
 
-or - if you know which notebook you want to have a look at:
-
-```julia
-using Pluto
-Pluto.run(notebook="what_are_images.jl")
-```
 
 Enjoy!
