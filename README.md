@@ -30,7 +30,7 @@ pwd # print working directory: where are you in the file hierarchy?
 
 
 ```julia
-p = ["DelimitedFiles","NIfTI","Images","ImageView","Plots","Pluto","PlutoUI"]
+p = ["DelimitedFiles","DataFrames", "GLM", "NIfTI","Images","ImageView","Plots","Pluto","PlutoUI"]
 import Pkg
 Pkg.add(p)
 # there are other ways to do this, too...
