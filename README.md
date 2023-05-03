@@ -16,7 +16,8 @@ You could also used this as a starting point for learning a bit of scripting / p
 ```bash
 cd ~
 git clone https://github.com/schluppeck/hands-on-brain-data.git
-
+```
+```bash
 # wait for it to download / clone and then change directory into it
 cd hands-on-brain-data
 # you can now look around at the files in this folder
