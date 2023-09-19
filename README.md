@@ -54,3 +54,16 @@ Pluto.run()
 
 
 Enjoy!
+
+## update notes
+
+You can use this snippet of code to get rid of `Pluto.jl` Manifest.toml update warnings
+
+```julia
+begin
+    using Pkg 
+    Pkg.upgrade_manifest()
+    Pkg.resolve()
+end
+```
+
