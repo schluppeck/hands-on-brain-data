@@ -48,9 +48,11 @@ Pluto.run()
 
 <img src="./pluto-notebook.png" width="50%"/>
 
+**A good place to start is the notebook `what_are_images.jl`.** Load it, Click `Run Notebook code` at the top of the page... the first time you do this, it may take 30s to a minute to update packages.... you can look at the `Status` (by clicking the status button at the bottom right... this will show you progress of what's happening. Second time aroud, the code will run *much* faster).
+
 ## Additional resources
 
-If you scroll to the bottom of the `Pluto` launch window, you can also find some `Featured Notebooks` which are a good place to find your feet with `julia` and `Pluto`.
+- If you scroll to the bottom of the `Pluto` launch window, you can also find some `Featured Notebooks` which are a good place to find your feet with `julia` and `Pluto`.
 
 <img src="./featured-notebooks.png" width="50%"/>
 
