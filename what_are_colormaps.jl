@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.26
+# v0.19.32
 
 using Markdown
 using InteractiveUtils
@@ -302,10 +302,23 @@ md"""## math typsetting etc
 
 an equation 
 
+```
 \begin{equation}
+
 	\sum_{i=0}^{\infty}\frac{1}{x^i}
+
 \end{equation}
+```
+
+$\begin{equation}
+	\sum_{i=0}^{\infty}\frac{1}{x^i}
+\end{equation}$
+
+
 """
+
+# ╔═╡ 56027975-33d2-459e-a9b9-60769d39fc2b
+
 
 # ╔═╡ 44de79f0-f450-11ea-0f93-15cb49d19311
 md"""## An interactive 3d viewer"""
@@ -450,7 +463,7 @@ StatsBase = "~0.33.21"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.9.1"
+julia_version = "1.9.3"
 manifest_format = "2.0"
 project_hash = "703a985364670b9853e06c9be1bb20ce89745485"
 
@@ -604,7 +617,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.2+0"
+version = "1.0.5+0"
 
 [[deps.ComputationalResources]]
 git-tree-sha1 = "52cb3ec90e8a8bea0e62e275ba577ad0f74821f7"
@@ -684,6 +697,12 @@ version = "0.9.3"
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
+
+[[deps.EpollShim_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl"]
+git-tree-sha1 = "8e9441ee83492030ace98f9789a654a6d0b1f643"
+uuid = "2702e6a9-849d-5ed8-8c21-79e8b8f9ee43"
+version = "0.0.20230411+0"
 
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
@@ -1437,7 +1456,7 @@ version = "0.42.2+0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.9.0"
+version = "1.9.2"
 
 [[deps.PkgVersion]]
 deps = ["Pkg"]
@@ -1768,7 +1787,7 @@ uuid = "41fe7b60-77ed-43a1-b4f0-825fd5a5650d"
 version = "0.2.0"
 
 [[deps.Wayland_jll]]
-deps = ["Artifacts", "Expat_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg", "XML2_jll"]
+deps = ["Artifacts", "EpollShim_jll", "Expat_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg", "XML2_jll"]
 git-tree-sha1 = "ed8d92d9774b077c53e1da50fd81a36af3744c1c"
 uuid = "a2964d1f-97da-50d4-b82a-358c7fce9d89"
 version = "1.21.0+0"
@@ -2118,11 +2137,12 @@ version = "1.4.1+0"
 # ╟─2c6ad37c-04a0-11eb-28b7-8b55c2f60cb3
 # ╟─0b4e44d4-04a1-11eb-3e57-53f8cdb029a7
 # ╟─9f76bc18-0421-11eb-2d94-f7aa0f2e0998
+# ╠═56027975-33d2-459e-a9b9-60769d39fc2b
 # ╠═f0ef494e-f80c-11ea-1163-b954c1739162
 # ╠═bb15657a-f5f4-11ea-2555-65b86fec3444
 # ╠═c6f20f76-f5f4-11ea-05d2-aba2612911f4
 # ╟─44de79f0-f450-11ea-0f93-15cb49d19311
-# ╟─1fed409a-f450-11ea-21be-8d44768dea80
+# ╠═1fed409a-f450-11ea-21be-8d44768dea80
 # ╟─25d9fd54-f450-11ea-3b2a-2f872e88a372
 # ╟─2b2f6be4-f07f-11ea-1459-775749ca949f
 # ╟─8df7fcb6-f602-11ea-3f15-ff7c241ce9d4
@@ -2130,7 +2150,7 @@ version = "1.4.1+0"
 # ╟─141dde62-efb1-11ea-34df-cd5e838d8129
 # ╟─13a8fe64-efb4-11ea-1ac6-dbd49975dddf
 # ╟─71606d26-efb4-11ea-12e2-75f85b9ea7d8
-# ╟─072ce484-efb2-11ea-36ee-29a0147cfc04
+# ╠═072ce484-efb2-11ea-36ee-29a0147cfc04
 # ╟─f289d412-05be-11eb-172b-316cebd67e80
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
