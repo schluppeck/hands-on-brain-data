@@ -25,19 +25,11 @@ ls
 pwd # print working directory: where are you in the file hierarchy?
 ```
 
-- Next, start the `julia` interpreter by double-clicking the app icon or start `julia` in the shell, if you have set it up. Then make sure you have the dependencies (packages installed).:
+- Next, start the `julia` interpreter by double-clicking the app icon or start `julia` in the shell, if you have set it up. You can install dependencies at this point, but if you are going to run the notebooks with `Pluto` you can also do that from within that environment
 
 <img src="./julia.png" width="30%"/> <img src="./julia-shell.png" width="30%"/>  <img src="./julia-cd.png" width="30%"/>
 
-
-```julia
-p = ["DataFrames","DelimitedFiles", "GLM", "NIfTI","Images","ImageView","Plots","Pluto","PlutoUI","StatsPlots"]
-import Pkg
-Pkg.add(p)
-# there are other ways to do this, too...
-```
-
-Then run the Pluto notebook you want to explore. The first time you run it, you will have to be a bit patient, as some additional packages may need to be installed)
+Try and run the Pluto notebook you want to explore. The first time you run it, you will have to be a bit patient, as some additional packages may need to be installed)
 
 ```julia
 # change directory to the folder with the downloaded files...
@@ -46,12 +38,24 @@ Then run the Pluto notebook you want to explore. The first time you run it, you 
 cd ~/hands-on-brain-data
 # BACKSPACE to go back to the julia prompt
 using Pluto
+
+# for versions 1.9 onwards, the julia package manager will ask you if you
+# want to install this package if you don't already have it... say [y]
+
 Pluto.run()
 # and open specific notebook in browser
 ```
 
 <img src="./pluto-notebook.png" width="50%"/>
 
+## Additional resources
+
+If you scroll to the bottom of the `Pluto` launch window, you can also find some `Featured Notebooks` which are a good place to find your feet with `julia` and `Pluto`.
+
+<img src="./featured-notebooks.png" width="50%"/>
+
+- Grant Sanderson has a brilliant video explaining images, etc. [in the second class of this MIT OpenCourseWare lecture](https://www.youtube.com/watch?v=DGojI9xcCfg&list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ&index=2
+), which is part of a whole course on [Computational Thinking](https://www.youtube.com/playlist?list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ).
 
 Enjoy!
 
