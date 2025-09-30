@@ -263,10 +263,10 @@ BWImage(randn(30,30), zoom=7)
 
 # ╔═╡ Cell order:
 # ╟─8029070e-efb0-11ea-1d0a-7f402f2e9989
-# ╠═cbc19359-d1e7-424c-8c02-d816dbd1a6c6
-# ╠═9bc349e8-efb0-11ea-1392-cd735828af33
+# ╟─cbc19359-d1e7-424c-8c02-d816dbd1a6c6
+# ╟─9bc349e8-efb0-11ea-1392-cd735828af33
 # ╟─46fbc1de-13d1-11eb-2553-71dfd823a5a0
-# ╠═141dde62-efb1-11ea-34df-cd5e838d8129
+# ╟─141dde62-efb1-11ea-34df-cd5e838d8129
 # ╠═f0ef494e-f80c-11ea-1163-b954c1739162
 # ╟─cdf28f06-1449-11eb-34b1-65a1fb83f330
 # ╟─13a8fe64-efb4-11ea-1ac6-dbd49975dddf

@@ -1,5 +1,7 @@
 [deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+GLM = "38e38edf-8417-5370-95a0-9cbb8c7f171a"
 Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
 NIfTI = "a3a9e032-41b5-5fc4-967a-a6b7a19844d3"
 Pipe = "b98c9c47-44ae-5843-9183-064241ee97a0"
