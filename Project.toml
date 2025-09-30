@@ -1,3 +1,8 @@
 [deps]
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
+NIfTI = "a3a9e032-41b5-5fc4-967a-a6b7a19844d3"
+Pipe = "b98c9c47-44ae-5843-9183-064241ee97a0"
 Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
