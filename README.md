@@ -2,11 +2,11 @@
 
 Denis Schluppeck, started Sept/Oct 2020.
 
-This material provides some details for reproducing the animations / interactive examples I have used to for teaching in my 2nd year undergraduate lab in **neuroimaging**. 
+This material provides some details for reproducing the animations / interactive examples I have used to for teaching in my 2nd year undergraduate lab in **neuroimaging**, as well as part of the MSc Cognitive Neuroscience course.
 
 You could also used this as a starting point for learning a bit of scripting / programming for your  own data analysis with #julialang with sample MRI data shown in class.
 
-<img src="julia-gif.gif" alt="example animation"> 
+<img src="images/julia-gif.gif" alt="example animation"> 
 
 ## Getting set up
 
@@ -27,7 +27,7 @@ pwd # print working directory: where are you in the file hierarchy?
 
 - Next, start the `julia` interpreter by double-clicking the app icon or start `julia` in the shell, if you have set it up. You can install dependencies at this point, but if you are going to run the notebooks with `Pluto` you can also do that from within that environment
 
-<img src="./julia.png" width="30%"/> <img src="./julia-shell.png" width="30%"/>  <img src="./julia-cd.png" width="30%"/>
+<img src="images/julia.png" width="30%"/> <img src="./julia-shell.png" width="30%"/>  <img src="images/julia-cd.png" width="30%"/>
 
 Try and run the Pluto notebook you want to explore. The first time you run it, you will have to be a bit patient, as some additional packages may need to be installed)
 
@@ -46,7 +46,7 @@ Pluto.run()
 # and open specific notebook in browser
 ```
 
-<img src="./pluto-notebook.png" width="50%"/>
+<img src="images/pluto-notebook.png" width="50%"/>
 
 **A good place to start is the notebook `what_are_images.jl`.** Load it, Click `Run Notebook code` at the top of the page... the first time you do this, it may take 30s to a minute to update packages.... you can look at the `Status` (by clicking the status button at the bottom right... this will show you progress of what's happening. Second time aroud, the code will run *much* faster).
 
@@ -54,22 +54,9 @@ Pluto.run()
 
 - If you scroll to the bottom of the `Pluto` launch window, you can also find some `Featured Notebooks` which are a good place to find your feet with `julia` and `Pluto`.
 
-<img src="./featured-notebooks.png" width="50%"/>
+<img src="images/featured-notebooks.png" width="50%"/>
 
 - Grant Sanderson has a brilliant video explaining images, etc. [in the second class of this MIT OpenCourseWare lecture](https://www.youtube.com/watch?v=DGojI9xcCfg&list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ&index=2
 ), which is part of a whole course on [Computational Thinking](https://www.youtube.com/playlist?list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ).
 
 Enjoy!
-
-## update notes
-
-You can use this snippet of code to get rid of `Pluto.jl` Manifest.toml update warnings
-
-```julia
-begin
-    using Pkg 
-    Pkg.upgrade_manifest()
-    Pkg.resolve()
-end
-```
-
