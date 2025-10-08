@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.19
+# v0.20.18
 
 using Markdown
 using InteractiveUtils
@@ -83,13 +83,19 @@ begin
 	
 end
 
+# ╔═╡ a0d20140-e24f-40fb-a685-e8eff9dfa432
+md"show haemodynamics? $(@bind showHD CheckBox())"
+
 # ╔═╡ c6cab78c-f836-11ea-2b5b-23f0006f8e93
 begin
-	plot(view(d, 1:whichRow,1), view(d,1:whichRow,2), xlabel="Time (volumes)",
-		ylabel="fMRI response", label="$(h[2])", xlims=(0, 160), ylims=(-5, 5), lw=2)
-	plot!(view(d, 1:whichRow,1), view(d,1:whichRow,3), 
-		label="$(h[3])", xlims=(0, 160), ylims=(-5, 5), lw=3, color=:red)
+	plot()
+	if showHD
+		plot!(view(d, 1:whichRow,1), view(d,1:whichRow,3), 
+			label="$(h[3])", xlims=(0, 160), ylims=(-5, 5), lw=3, color=:red)
+	end
 	
+	plot!(view(d, 1:whichRow,1), view(d,1:whichRow,2), xlabel="Time (volumes)",
+		ylabel="fMRI response", label="$(h[2])", xlims=(0, 160), ylims=(-5, 5), lw=2, color=:blue)
 	
 end
 
@@ -365,6 +371,7 @@ end
 # ╟─368e2640-f8e0-11ea-1ddf-b37069ba7588
 # ╟─cac0339a-f8e4-11ea-0876-f91dc7db1454
 # ╟─1058934e-f8e1-11ea-1896-35d75c4b6a8e
+# ╟─a0d20140-e24f-40fb-a685-e8eff9dfa432
 # ╟─c6cab78c-f836-11ea-2b5b-23f0006f8e93
 # ╟─da4ac85c-f8e4-11ea-192e-03d5b6862d5a
 # ╟─1c3b6c56-f8e2-11ea-3969-f59871025c5e

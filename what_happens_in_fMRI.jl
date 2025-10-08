@@ -1,5 +1,13 @@
 ### A Pluto.jl notebook ###
-# v0.20.19
+# v0.20.18
+
+#> [frontmatter]
+#> title = "Interactive demonstration with fMRI data"
+#> description = "Illustrates how fMRI data can be analysed using linear regression (GLM) approach - interactive demos"
+#> 
+#>     [[frontmatter.author]]
+#>     name = "Denis Schluppeck"
+#>     url = "https://schluppeck.github.io/ds1"
 
 using Markdown
 using InteractiveUtils
